@@ -9,11 +9,11 @@
       var urlParams = new URLSearchParams(window.location.search);
       
       if (urlParams.get('transactionid')) {
-        transactionId = urlParams.get('transactionId');
+                var transactionId = urlParams.get('transactionid');
       } else
       {
-        var transactionId = urlParams.get('transactionid');
-
+      transactionId = urlParams.get('transactionId');
+      }
       // Make the API call
       $.ajax({
         url: 'https://ind-thomas.hyperverge.co/v1/linkedinVerificationResults',
