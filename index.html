@@ -36,9 +36,7 @@
           'transactionId': transactionId
         }),
         success: function(response) {
-          console.log('API call successful');
-          console.log('response' response);
-          
+          console.log('API call successful') 
           // Redirect to the returned URL
           window.location.href = response.result.startKycUrl;
         },
