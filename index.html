@@ -50,3 +50,72 @@
   </script>
 </body>
 </html>
+Save the above code in an HTML file (e.g., index.html), and when you open the file in a web browser, you'll see a form with a transaction ID input field and a submit button. When you enter a transaction ID and click the submit button, it will trigger the curl call using AJAX and log the response to the browser console.
+
+Note that to make the AJAX call, the code uses the jQuery library, which is included in the <script> tag from the jQuery CDN.
+
+
+
+
+
+User
+the ajax calls returns a url. redirect to that URL after getting response
+ChatGPT
+Apologies for the oversight. To redirect to the URL returned in the AJAX response after receiving the API response, you can modify the JavaScript code as follows:
+
+html
+Copy code
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Call API</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <h1>Call API</h1>
+  <form id="apiForm">
+    <label for="transactionId">Transaction ID:</label>
+    <input type="text" id="transactionId" name="transactionId">
+    <br>
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    // Function to handle form submission
+    $('#apiForm').submit(function(event) {
+      event.preventDefault();
+
+      // Get the transactionId value from the input field
+      var transactionId = $('#transactionId').val();
+
+      // Make the curl call using AJAX
+      $.ajax({
+        url: 'https://ind.idv.hyperverge.co/v1/link-kyc/start',
+        type: 'PUT',
+        headers: {
+          'appId': '4mrydd',
+          'appKey': 'f4hn3vian6j2oaqitf2f',
+          'Content-Type': 'application/json'
+        },
+        data: JSON.stringify({
+          'workflowId': 'linkedInAadhaarLivenessFM_mobile',
+          'redirectUrl': 'https://www.linkedin.com',
+          'transactionId': transactionId
+        }),
+        success: function(response) {
+          console.log('API call successful');
+          console.log(response);
+          
+          // Redirect to the returned URL
+          window.location.href = response.redirectUrl;
+        },
+        error: function(xhr, status, error) {
+          console.log('API call failed');
+          console.log(error);
+          // Handle the error here
+        }
+      });
+    });
+  </script>
+</body>
+</html>
