@@ -1,49 +1,39 @@
-
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Call API</title>
+  <title>API Call with jQuery</title>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      // Get the transactionId from the request parameter
+      var urlParams = new URLSearchParams(window.location.search);
+      var transactionId = urlParams.get('transactionid');
+
+      // Make the API call
+      $.ajax({
+        url: 'https://ind-thomas.hyperverge.co/v1/linkedinVerificationResults',
+        type: 'POST',
+        headers: {
+          'appId': '4mrydd',
+          'appKey': 'f4hn3vian6j2oaqitf2f',
+          'Content-Type': 'application/json'
+        },
+        data: JSON.stringify({
+          "transactionId": transactionId
+        }),
+        success: function(response) {
+          // Handle the API response here
+          console.log(response);
+        },
+        error: function(xhr, status, error) {
+          // Handle any errors here
+          console.error(error);
+        }
+      });
+    });
+  </script>
 </head>
 <body>
-  <h1>Call API</h1>
-
-  <script>
-    // Function to extract query parameters from the URL
-    function getParameterByName(name, url) {
-      if (!url) {
-        url = window.location.href;
-      }
-      name = name.replace(/[[\]]/g, '\\$&');
-      var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
-      var results = regex.exec(url);
-      if (!results) {
-        return null;
-      }
-      if (!results[2]) {
-        return '';
-      }
-      return decodeURIComponent(results[2].replace(/\+/g, ' '));
-    }
-
-    // Get the transactionId from the query parameter
-    var transactionId = getParameterByName('transactionId');
-
-    // Construct the curl command
-    var curlCommand = `curl --location 'https://ind-thomas.hyperverge.co/v1/linkedinVerificationResults' \
---header 'appId: 4mrydd' \
---header 'appKey: f4hn3vian6j2oaqitf2f' \
---header 'Content-Type: application/json' \
---data '{
-  "transactionId": "${transactionId}"
-}'`;
-
-    // Log the curl command to the console
-    console.log(curlCommand);
-
-    // Make the curl call here
-    // ...
-
-  </script>
+  <h1>API Call with jQuery</h1>
 </body>
 </html>
