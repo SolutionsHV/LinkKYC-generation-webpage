@@ -38,7 +38,7 @@
         success: function(response) {
           console.log('API call successful') 
           // Redirect to the returned URL
-          window.location.href = response.result.startKycUrl;
+          window.open(response.result.startKycUrl);
         },
         error: function(xhr, status, error) {
           console.log('API call failed');
