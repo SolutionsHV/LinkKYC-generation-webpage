@@ -7,10 +7,12 @@
     $(document).ready(function() {
       // Get the transactionId from the request parameter
       var urlParams = new URLSearchParams(window.location.search);
-      var transactionId = urlParams.get('transactionid');
-      if (transactionId === "") {
+      
+      if (urlParams.get('transactionid')) {
         transactionId = urlParams.get('transactionId');
-      }
+      } else
+      {
+        var transactionId = urlParams.get('transactionid');
 
       // Make the API call
       $.ajax({
