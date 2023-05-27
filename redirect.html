@@ -29,7 +29,7 @@
         success: function(response) {
           // Handle the API response here
           console.log(response);
-          $('#status').text('Response Status: ' + response.status);
+          $('#status').text('Response Status: ' + response.result.verficationStatus);
           console.log(response);
         },
         error: function(xhr, status, error) {
