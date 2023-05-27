@@ -8,6 +8,8 @@
       // Get the transactionId from the request parameter
       var urlParams = new URLSearchParams(window.location.search);
       var transactionId = urlParams.get('transactionid');
+      if (transactionId === "") {
+        transactionId = urlParams.get('transactionId');
 
       // Make the API call
       $.ajax({
